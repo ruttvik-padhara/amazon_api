@@ -3,6 +3,7 @@ from typing import Union
 import requests
 from lxml import html
 import re
+import os
 from pymongo import MongoClient
 from datetime import datetime
 from pydantic import BaseModel
@@ -11,7 +12,9 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 # MongoDB setup
-client = MongoClient("mongodb://localhost:27017/")
+MONGO_URI="mongodb+srv://ruttvikpadharaactowiz:<db_password>@cluster0.ztutrdw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = os.getenv("MONGO_URI")
+client = MongoClient(MONGO_URI)
 db = client["amazon_api"]
 key_table = db["key_tables"]
 logs_table = db["logs_table"]
